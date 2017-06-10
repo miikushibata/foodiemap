@@ -3,7 +3,9 @@
     <div class="cover-inner">
       <div class="cover-contents">
         <h1>お気に入りのレストランを記録しよう</h1>
-        <a href="" class="btn btn-success btn-lg">Foodie Mapを始める</a>
+        <% unless logged_in? %>
+          <%= link_to 'Foodie Mapを始める', signup_path, class: 'btn btn-success btn-lg' %>
+        <% end %>
       </div>
     </div>
   </div>
