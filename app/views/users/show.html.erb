@@ -1,0 +1,11 @@
+<!-- ユーザーのトップページ -->
+<!-- タブが３つ　①マップ②行ったリスト③行きたいリスト　-->
+
+<div class="user-profile">
+  <div class="icon text-center">
+    <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
+  </div>
+  <div class="name text-center">
+    <h1><%= @user.name %></h1>
+  </div>
+</div>
