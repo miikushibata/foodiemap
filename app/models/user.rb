@@ -6,4 +6,42 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   
   has_secure_password
+  
+  has_many :rest_favorites
+  has_many :restaurants, through: :rest_favorites
+  
+  has_many :visits
+  has_many :visit_restraurants, through: :visits, class_name: 'Restaurant', source: :restaurant
+  
+  has_many :interests
+  has_many :interest_restaurants, through: :interests, class_name: 'Restaurant', source: :restaurant
+
+ # Visit（行った）機能 
+  def visit(restaurant)
+    self.visits.find_or_create_by(restaurant_id: restaurant.id)
+  end
+  
+  def unvisit(restaurant)
+    visit = self.visits.find_by(restaurant_id: restaurant.id)
+    visit.destroy if visit
+  end
+  
+  def visit?(restaurant)
+    self.visit_restraurants.include?(restaurant)
+  end
+  
+# Interest(行きたい)機能
+  def interest(restaurant)
+    self.interests.find_or_create_by(restaurant_id: :restaurant.id)
+  end
+  
+  def uninterest(restaurant)
+    interest = self.interests.find_by(restaurant_id: :restaurant.id)
+    interest.destroy if interest
+  end
+  
+  def interest?(restaurant)
+    self.interest_restaurants.include?(restaurant)
+  end
+  
 end
