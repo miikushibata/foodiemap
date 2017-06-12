@@ -3,6 +3,16 @@ class RestaurantsController < ApplicationController
   
   def new
   end
+  
+  def create
+    require 'open-uri'
+    require 'uri'
+    keyword = URI.escape(params[:search][:q])
+    res = open("https://api.gnavi.co.jp/RestSearchAPI/20150630/?keyid=#{ENV['GURUNAVI_API_KEY_ID']}&format=json&freeword=#{keyword}")
+    result = JSON.parse(res.read, {symbolize_names: true})
+    @rests = result[:rest]
+    render :new
+  end
 
   def show
   end
