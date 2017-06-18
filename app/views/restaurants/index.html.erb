@@ -1,0 +1,11 @@
+<!-- Restaurants#new -->
+<h1>レストランを検索</h1>
+
+<%= form_for(:search, url: restaurants_path, method: 'GET') do |f| %>
+  <%= f.text_field :q %>
+  <%= f.submit %>
+<% end %>
+
+<%#= link_to "検索する", restaurants_path, method: :post %>
+
+<%= render 'restaurants', restaurants: @restaurants %>

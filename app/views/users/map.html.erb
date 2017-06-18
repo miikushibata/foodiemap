@@ -3,25 +3,37 @@
 
 <div class="row">
   <div class="user-profile">
-    <div class="icon text-center">
-      <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
-    </div>
-    <div class="name text-center">
-      <h1><%= @user.name %></h1>
-    </div>
+     <div class="icon text-center">
+       <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
+     </div>
+     <div class="name text-center">
+       <h1><%= @user.name %></h1>
+     </div>
   </div>
-  
-  <div class="col-xs-10">
+
+  <div class="col-xs-12">
     <ul class="nav nav-tabs nav-justified">
-      <li><a href="#">MAP</a></li>
-      <li><a href="#">行ったリスト</a></li>
-      <li><a href="#">行きたいリスト</a></li>
+      <li class="<%= 'active' if current_page?(map_user_path(@user)) %>"><%= link_to map_user_path(@user) do %>MAP <span class="badge"><%= @count_map %></span><% end %></li>
+      <li class="<%= 'active' if current_page?(visit_list_user_path(@user)) %>"><%= link_to visit_list_user_path(@user) do %>行ったリスト <span class="badge"><%= @count_visit %></span><% end %></li>
+      <li class="<%= 'active' if current_page?(interest_list_user_path(@user)) %>"><%= link_to interest_list_user_path(@user) do %>行きたいリスト <span class="badge"><%= @count_interest %></span><% end %></li>
     </ul>
-    
-    <div class="map">
-      ここにGoogle Mapを表示
-    </div>
-    
-  </div>
+   <br>
   
+  <!-- ここにGoogle Mapを表示 -->
+  <div class="map">
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+
+    <script type="text/javascript">
+          handler = Gmaps.build('Google');
+          handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+            markers = handler.addMarkers(<%=raw @hash.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+          });
+    </script>
+  </div>
+    
+ </div>
 </div>

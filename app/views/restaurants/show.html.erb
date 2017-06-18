@@ -1,2 +1,45 @@
-<h1>Restaurants#show</h1>
-<p>Find me in app/views/restaurants/show.html.erb</p>
+<div class="row">
+  <div class="col-md-10">
+  <h2>店舗詳細ページ</h2>
+  <!-- レストラン詳細  -->
+   <div class="restaurant">
+        <h2 class="rest_title"><%= @restaurant.name %></h2>
+        <img src="<%= @restaurant.image_url %>" alt="">
+        <div class="rest_detail">
+           <p> <%= @restaurant.pr_short %></p>
+           <p> <%= @restaurant.address %></p>
+        </div>
+        <a href="<%= @restaurant.url %>">ぐるなび店舗ページをみる▶︎</a>
+        <div class="buttons">
+            <%= render 'rest_favorites/visit_button', restaurant: @restaurant %>
+            <%= render 'rest_favorites/interest_button', restaurant: @restaurant %>
+        </div>
+   </div>
+   
+  <!-- review入力フォーム -->
+  <div class="review_create">
+    <div class="col-xs-6">
+        <%= form_for(@review) do |f| %>
+          <div class="form_group">
+              <%= f.label :date, '来店日時' %>
+              <%= f.text_area :date, class: 'form-control input-sm' %>
+          </div>
+          <div class="form_group">
+              <%= f.label :content, 'コメント' %>
+              <%= f.text_area :content, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Post', class: 'btn btn-primary' %>
+          <%= f.hidden_field :restaurant_id, value: @restaurant.id %>
+        <% end %>
+    </div>
+  </div>
+   
+  <!-- reviewコメント一覧 -->
+  <div class="review">
+    <div class="col-md-6 col-sm-6">
+     <%= render 'reviews/reviews', reviews: @reviews, user: @user %>
+    </div>
+  </div>
+  
+ </div>
+</div>

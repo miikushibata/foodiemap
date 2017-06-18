@@ -1,0 +1,18 @@
+<!-- Unvisitボタン -->
+<%if current_user.visit?(restaurant)%>
+
+  <%= form_tag(rest_favorite_path(restaurant.id), method: :delete) do %>
+    <%= hidden_field_tag :rest_id, restaurant.code %>
+    <%= hidden_field_tag :type, 'Visit' %>
+    <%= submit_tag '行ったを外す', class: 'btn btn-success' %>
+  <% end %>
+  
+<% else %>
+
+<!-- Visitボタン -->
+  <%= form_tag(rest_favorites_path) do %>
+    <%= hidden_field_tag :rest_id, restaurant[:code] %>
+    <%= hidden_field_tag :type, 'Visit' %>
+    <%= submit_tag '行った', class: 'btn btn-primary' %>
+  <% end %>
+<% end %>

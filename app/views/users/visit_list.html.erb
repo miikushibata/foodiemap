@@ -1,5 +1,5 @@
-<!-- ユーザーのトップページ -->
-<!-- タブが３つ　①マップ②行ったリスト③行きたいリスト　-->
+<!-- ユーザーの「行ったリスト」ページ -->
+<!-- タブの２つめ -->
 
 <div class="row">
   <div class="user-profile">
@@ -17,7 +17,15 @@
       <li class="<%= 'active' if current_page?(visit_list_user_path(@user)) %>"><%= link_to visit_list_user_path(@user) do %>行ったリスト <span class="badge"><%= @count_visit %></span><% end %></li>
       <li class="<%= 'active' if current_page?(interest_list_user_path(@user)) %>"><%= link_to interest_list_user_path(@user) do %>行きたいリスト <span class="badge"><%= @count_interest %></span><% end %></li>
     </ul>
+    <br>
+    
+    <!-- 「行った」登録した店一覧をリスト表示 -->
+    <div class="map">
+
+      <%= render 'restaurants/restaurants', restaurants: @visit_restaurants %>
+
+    </div>
+    
   </div>
   
 </div>
-

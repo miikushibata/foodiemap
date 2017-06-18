@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612065351) do
+ActiveRecord::Schema.define(version: 20170616032425) do
 
   create_table "rest_favorites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "type"
@@ -26,13 +26,25 @@ ActiveRecord::Schema.define(version: 20170612065351) do
   create_table "restaurants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
     t.string   "name"
-    t.string   "adress"
+    t.string   "address"
     t.string   "image_url"
     t.float    "latitude",   limit: 24
     t.float    "longitude",  limit: 24
     t.string   "url"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.string   "pr_short"
+  end
+
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "date"
+    t.string   "content"
+    t.integer  "user_id"
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["restaurant_id"], name: "index_reviews_on_restaurant_id", using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -45,4 +57,6 @@ ActiveRecord::Schema.define(version: 20170612065351) do
 
   add_foreign_key "rest_favorites", "restaurants"
   add_foreign_key "rest_favorites", "users"
+  add_foreign_key "reviews", "restaurants"
+  add_foreign_key "reviews", "users"
 end

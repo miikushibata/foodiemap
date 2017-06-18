@@ -1,7 +1,7 @@
 class Restaurant < ApplicationRecord
   validates :code, presence: true, length: { maximum: 255 }
   validates :name, presence: true, length: { maximum: 255 }
-  validates :adress, presence: true, length: { maximum: 255 }
+  validates :address, presence: true, length: { maximum: 255 }
   validates :url, presence: true, length: { maximum: 255 }
   validates :image_url, presence: true, length: { maximum: 255 }
   
@@ -13,5 +13,12 @@ class Restaurant < ApplicationRecord
 
   has_many :interests
   has_many :interest_users, through: :interests, class_name: 'User', source: :user
+  
+  has_many :reviews
+  has_many :users, through: :reviews
+  
+  #Google Map表示用
+  geocoded_by :address
+  after_validation :geocode
 
 end

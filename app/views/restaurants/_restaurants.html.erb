@@ -1,0 +1,28 @@
+<% if restaurants %>
+  <div class="row">
+    <ul>
+      <% restaurants.each do |rest| %>
+        <div class="restaurant">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel panel-default">
+            <div class="panel-left col-lg-3 col-md-3 col-sm-3 col-xs-12">
+              <img src="<%= rest.image_url %>" alt="" class="img-thumbnail">
+            </div>
+            <div class="panel-right col-lg-9 col-md-9 col-sm-9 col-xs-12">
+              <h3 class="rest_title"><%= rest[:name] %></h3>
+              <div class="rest_detail">
+                  <p> <%= rest.pr_short %></p>
+                  <p><%= rest.address %></p>
+              </div>
+              <a href="<%= rest.url %>">ぐるなび店舗ページをみる▶︎</a>
+              <div class="buttons text-center">
+                <%= render 'rest_favorites/visit_button', restaurant: rest %>
+                <%= render 'rest_favorites/interest_button', restaurant: rest %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </ul>
+      
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<div class="row">
+<h4>レビュー</h4>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel panel-default">
+  <% reviews.each do |review| %>
+    <span><%= review.date %></span>
+    <p><%= review.content %></p>
+    
+  <% end %>
+
+</div>
+</div>
