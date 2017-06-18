@@ -22,7 +22,7 @@
         <%= form_for(@review) do |f| %>
           <div class="form_group">
               <%= f.label :date, '来店日時' %>
-              <%= f.text_area :date, class: 'form-control input-sm' %>
+              <%= f.date_field :date, class: 'form-control input-sm' %>
           </div>
           <div class="form_group">
               <%= f.label :content, 'コメント' %>

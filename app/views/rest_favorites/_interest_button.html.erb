@@ -1,7 +1,15 @@
 <!-- Uninterestボタン -->
-<%if current_user.visit?(restaurant)%>
+<% if restaurant.id.present? and @interest_codes.include?(restaurant.code) %>
 
-  <%= form_tag(rest_favorite_path(restaurant.id), method: :delete) do %>
+  <%= form_tag(rest_favorite_path(RestFavorite.find_by(restaurant_id: restaurant.id)), method: :delete) do %>
+    <%= hidden_field_tag :rest_id, restaurant.code %>
+    <%= hidden_field_tag :type, 'Interest' %>
+    <%= submit_tag '行きたいを外す', class: 'btn btn-success' %>
+  <% end %>
+  
+<% elsif @interest_codes.include?(restaurant.code) %>
+
+  <%= form_tag(rest_favorite_path(RestFavorite.find_by(restaurant_id: Restaurant.find_by(code: restaurant.code).id)), method: :delete) do %>
     <%= hidden_field_tag :rest_id, restaurant.code %>
     <%= hidden_field_tag :type, 'Interest' %>
     <%= submit_tag '行きたいを外す', class: 'btn btn-success' %>

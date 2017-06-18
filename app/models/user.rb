@@ -30,7 +30,7 @@ class User < ApplicationRecord
   end
   
   def visit?(restaurant)
-    self.visit_restaurants.include?(restaurant)
+    self.visit_restaurants.pluck(:code).include?(restaurant.id)
   end
   
 # Interest(行きたい)機能

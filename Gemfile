@@ -59,3 +59,5 @@ end
 
 gem "gmaps4rails"
 gem "geocoder"
+
+gem 'kaminari'

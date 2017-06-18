@@ -1,6 +1,6 @@
 module GurunaviUtil
   def gurunavi_base_url
-    "https://api.gnavi.co.jp/RestSearchAPI/20150630/?keyid=#{ENV['GURUNAVI_API_KEY_ID']}&format=json&"
+    "https://api.gnavi.co.jp/RestSearchAPI/20150630/?keyid=#{ENV['GURUNAVI_API_KEY_ID']}&hit_per_page=20&format=json&"
   end
   
   def gurunavi_by_keyword(keyword)

@@ -17,6 +17,7 @@
       <li class="<%= 'active' if current_page?(visit_list_user_path(@user)) %>"><%= link_to visit_list_user_path(@user) do %>行ったリスト <span class="badge"><%= @count_visit %></span><% end %></li>
       <li class="<%= 'active' if current_page?(interest_list_user_path(@user)) %>"><%= link_to interest_list_user_path(@user) do %>行きたいリスト <span class="badge"><%= @count_interest %></span><% end %></li>
     </ul>
+    <br>
     
     <!-- 「行きたい」登録した店一覧を表示 -->
     <div class="map">

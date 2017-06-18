@@ -23,7 +23,10 @@ class UsersController < ApplicationController
   
   def map
     @user = User.find(params[:id])
-    @restaurants = @user.restaurants
+    @restaurants = []
+    @restaurants << @user.visit_restaurants
+    @restaurants << @user.interest_restaurants
+    @restaurants = @restaurants.flatten.uniq
     
     #Google Map表示
     @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
@@ -37,11 +40,15 @@ class UsersController < ApplicationController
   def visit_list
     @user = User.find(params[:id])
     @visit_restaurants = @user.visit_restaurants
+    @visited_codes = current_user.visit_restaurants.pluck(:code)
+    @interest_codes = current_user.interest_restaurants.pluck(:code)
   end
   
   def interest_list
     @user = User.find(params[:id])
     @interest_restaurants = @user.interest_restaurants
+    @visited_codes = current_user.visit_restaurants.pluck(:code)
+    @interest_codes = current_user.interest_restaurants.pluck(:code)
   end
 
   
