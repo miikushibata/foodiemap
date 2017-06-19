@@ -47,6 +47,7 @@ class UsersController < ApplicationController
   def interest_list
     @user = User.find(params[:id])
     @interest_restaurants = @user.interest_restaurants
+    @interest_codes = current_user.interest_restaurants.pluck(:code)
     @visited_codes = current_user.visit_restaurants.pluck(:code)
     @interest_codes = current_user.interest_restaurants.pluck(:code)
   end

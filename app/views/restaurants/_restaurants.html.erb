@@ -9,7 +9,11 @@
             </div>
             <div class="panel-right col-lg-9 col-md-9 col-sm-9 col-xs-12">
               <% restaurant_find_by_code =  Restaurant.find_by(code: rest.code) %>
-              <h3 class="rest_title"><%= link_to_if restaurant_find_by_code, rest[:name], restaurant_find_by_code %></h3>
+                <h3 class="rest_title">
+                  <%= link_to_if restaurant_find_by_code, rest[:name], restaurant_find_by_code %>
+                </h3>
+              
+              
               <div class="rest_detail">
                   <p> <%= rest.pr_short %></p>
                   <p><%= rest.address %></p>
