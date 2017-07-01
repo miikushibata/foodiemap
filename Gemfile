@@ -61,3 +61,4 @@ gem "gmaps4rails"
 gem "geocoder"
 
 gem 'kaminari'
+gem 'dotenv-rails'
